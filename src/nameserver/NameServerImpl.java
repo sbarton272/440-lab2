@@ -1,3 +1,6 @@
+package nameserver;
+import registry.RemoteObjectRef;
+
 public class NameServerImpl 
     implements NameServer
 {

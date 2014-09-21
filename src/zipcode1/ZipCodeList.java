@@ -1,8 +1,9 @@
+package zipcode1;
 public class ZipCodeList
 {
-    String city;
-    String ZipCode;
-    ZipCodeList next;
+    public String city;
+    public String ZipCode;
+    public ZipCodeList next;
 
     public ZipCodeList(String c, String z, ZipCodeList n)
     {

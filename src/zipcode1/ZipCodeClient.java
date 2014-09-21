@@ -1,3 +1,4 @@
+package zipcode1;
 // a client for ZipCodeServer.
 // it uses ZipCodeServer as an interface, and test
 // all methods.
@@ -11,6 +12,10 @@
 //   end.
 
 import java.io.*;
+
+import registry.LocateSimpleRegistry;
+import registry.RemoteObjectRef;
+import registry.SimpleRegistry;
 
 public class ZipCodeClient { 
 

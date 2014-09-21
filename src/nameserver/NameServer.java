@@ -1,3 +1,6 @@
+package nameserver;
+import registry.RemoteObjectRef;
+
 public interface NameServer // extends YourRemote 
 {
     public RemoteObjectRef match(String name);

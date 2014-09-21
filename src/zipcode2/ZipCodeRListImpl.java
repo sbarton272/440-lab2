@@ -1,3 +1,4 @@
+package zipcode2;
 public class ZipCodeRListImpl 
     implements  ZipCodeRList
 {

@@ -1,3 +1,4 @@
+package registry;
 import java.io.*;
 
 // we test simple registry by binding a service to ROR.
