@@ -1,23 +1,30 @@
 package messages;
 
 public class LookupRequest implements Request {
+	
+	private String hostName;
+	private int port;
+	private String objName;
+	
+	public LookupRequest(String host, int prt, String obj){
+		hostName = host;
+		port = prt;
+		objName = obj;
+	}
 
 	@Override
 	public String getHostname() {
-		// TODO Auto-generated method stub
-		return null;
+		return hostName;
 	}
 
 	@Override
 	public int getPort() {
-		// TODO Auto-generated method stub
-		return 0;
+		return port;
 	}
 
 	@Override
 	public String getObjName() {
-		// TODO Auto-generated method stub
-		return null;
+		return objName;
 	}
 
 }

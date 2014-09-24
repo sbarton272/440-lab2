@@ -8,22 +8,35 @@ public class CallRequest implements Request {
 	private String clientHost;
 	private int clientPort;
 	
+	public CallRequest(String obj, String method, Object[] arg, String host, int port){
+		objName = obj;
+		methodName = method;
+		args = arg;
+		clientHost = host;
+		clientPort = port;
+	}
+	
 	@Override
 	public String getHostname() {
-		// TODO Auto-generated method stub
-		return null;
+		return clientHost;
 	}
 
 	@Override
 	public int getPort() {
-		// TODO Auto-generated method stub
-		return 0;
+		return clientPort;
 	}
 
 	@Override
 	public String getObjName() {
-		// TODO Auto-generated method stub
-		return null;
+		return objName;
+	}
+	
+	public String getMethodName() {
+		return methodName;
+	}
+	
+	public Object[] getArgs() {
+		return args;
 	}
 
 }
