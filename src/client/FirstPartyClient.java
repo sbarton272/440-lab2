@@ -8,7 +8,15 @@ public class FirstPartyClient {
 	private LookupRegistry lookupRegistry;
 	
 	public static void main(String[] args) {
-		// TODO
+		
+		// Create a registry to lookup remote objects
+		
+		// Generate a few people living on this device
+		
+		// Lookup people living on the server
+		
+
+		
 	}
 	
 }
