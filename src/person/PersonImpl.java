@@ -41,7 +41,27 @@ public class PersonImpl implements Person, RemoteObject  {
 		return name.hashCode();
 	}
 	
-	public Object callMethod(String methodName, Object[] args) {
+	public Object callMethod(String methodName, Object[] args) throws IllegalArgumentException {
+		if (methodName == METHOD_GET_NAME) {
+			if (args != null) {
+				throw new IllegalArgumentException("No arguments for getName");
+			}
+			return (Object) getName();			
+			
+		} else if (methodName == METHOD_EQUALS) {
+			if (args.length != 1) {
+				throw new IllegalArgumentException("One argument for equals");
+			}
+			return (Object) this.equals(args[0]);		
+			
+		} else if (methodName == METHOD_HACSH_CODE) {
+			if (args != null) {
+				throw new IllegalArgumentException("No arguments for hashCode");
+			}
+			return (Object) this.hashCode();
+		}
+		
+		// Default case
 		return null;
 	}
 }
