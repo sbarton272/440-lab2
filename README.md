@@ -15,7 +15,7 @@ TODO
 
 Client
 Tests
-RemoteObject
+-RemoteObject
 
 Server
 Registry
