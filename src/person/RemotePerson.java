@@ -10,20 +10,23 @@ public class RemotePerson extends RemoteStub implements Person {
 	 * User of the remote object needs to specify a unique object name as well
 	 * as the server details to determine where this object lives.
 	 * 
-	 * @param personName
 	 * @param objName
 	 * @param serverHost
 	 * @param serverPort
 	 */
-	public RemotePerson(String personName, String objName, String serverHost,
-			int serverPort) {
-		super(personName, objName, serverHost, serverPort);
+	public RemotePerson(String objName, String serverHost, int serverPort) {
+		super(objName, serverHost, serverPort);
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return (String) callRemoteMethod()
 	}
+	
+	public boolean equals(Object obj) {
+		
+	}
+	
+	public int hashCode()
 
 }

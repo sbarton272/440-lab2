@@ -4,12 +4,12 @@ import remoteobject.RemoteObject;
 
 public class PersonImpl implements Person, RemoteObject  {
 
-	private String name;
-	
 	// Method strings
 	private static final String METHOD_GET_NAME = "getName";
 	private static final String METHOD_EQUALS = "equals";
 	private static final String METHOD_HACSH_CODE = "hashCode";
+	
+	private String name;
 
 	/**
 	 * User of the remote object needs to specify a unique object name as well as the server details to determine where

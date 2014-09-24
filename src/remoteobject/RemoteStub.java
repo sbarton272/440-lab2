@@ -89,5 +89,10 @@ public abstract class RemoteStub implements Serializable {
 			throw (new RemoteException(e.getMessage()));
 		}
 	}
+	
+	public Object callRemoteMethod(String methodName)
+			throws RemoteException {
+		return callRemoteMethod(methodName, null);
+	}
 
 }
