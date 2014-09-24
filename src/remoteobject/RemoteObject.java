@@ -6,10 +6,9 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-import message.ResponseMessage;
+import messages.CallResponse;
 import messages.CallRequest;
 import messages.Request;
-import messages.Response;
 
 public abstract class RemoteObject implements Serializable {
 
@@ -61,24 +60,34 @@ public abstract class RemoteObject implements Serializable {
 		Request request = new CallRequest(objName, methodName, args,
 				clientHost, clientPort);
 
-		// Open socket
-		Socket soc = new Socket(serverHost, serverPort);
+		try {
+			
+			// Open socket to server
+			Socket soc = new Socket(serverHost, serverPort);
 
-		// Send request
-		ObjectOutputStream outStream = new ObjectOutputStream(
-				soc.getOutputStream());
-		outStream.writeObject(request);
+			// Send request
+			ObjectOutputStream outStream = new ObjectOutputStream(
+					soc.getOutputStream());
+			outStream.writeObject(request);
 
-		// Block on response
-		ObjectInputStream inStream = new ObjectInputStream(
-				soc.getInputStream());
-		Response response = (Response) inStream.readObject();
+			// Block on response
+			ObjectInputStream inStream = new ObjectInputStream(
+					soc.getInputStream());
+			CallResponse response = (CallResponse) inStream.readObject();
 
-		// Close streams
-		outStream.close();
-		inStream.close();
+			// Close streams
+			outStream.close();
+			inStream.close();
+			soc.close();
+			
+			// Extract and return response value as generic object
+			return response.getRtrnVal();
 
-		return null; // TODO
+		} catch (Exception e) {
+			
+			// Catch all errors and handle as a RemoteException
+			throw (new RemoteException(e.getMessage()));
+		}
 	}
 
 }
