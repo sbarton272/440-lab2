@@ -6,11 +6,10 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
-
 import messages.LookupRequest;
 import messages.LookupResponse;
-
 import remoteobject.RemoteObject;
+import remoteobject.RemoteStub;
 
 public class Registry {
 
@@ -40,7 +39,7 @@ public class Registry {
 			String objName = request.getObjName();
 			//get stub
 			RemoteObjectPair pair = registry.get(objName);
-			RemoteObject remoteObj = pair.getRemoteObject();
+			RemoteStub remoteObj = pair.getRemoteStub();
 			response = new LookupResponse(null, remoteObj);
 			
 		} catch (Exception e) {
@@ -57,24 +56,30 @@ public class Registry {
 		}
 	}
 	
-	public void addObj(String objName, Object obj, RemoteObject remoteObj) {
+	public void addObj(String objName, RemoteObject obj, RemoteStub remoteObj) {
 		RemoteObjectPair newPair = new RemoteObjectPair(obj, remoteObj);
 		registry.put(objName, newPair);
+	}
+	
+	//new function, make sense?
+	public RemoteObject localLookup(String objName){
+		RemoteObjectPair vals = registry.get(objName);
+		return vals.getObj();
 	}
 	
 }
 
 class RemoteObjectPair {
-	private RemoteObject remoteObj;
-	private Object obj;
-	public RemoteObjectPair(Object o, RemoteObject r){
+	private RemoteStub remoteObj;
+	private RemoteObject obj;
+	public RemoteObjectPair(RemoteObject o, RemoteStub r){
 		obj = o;
 		remoteObj = r;
 	}
-	public RemoteObject getRemoteObject(){
+	public RemoteStub getRemoteStub(){
 		return remoteObj;
 	}
-	public Object getObj(){
+	public RemoteObject getObj(){
 		return obj;
 	}
 }

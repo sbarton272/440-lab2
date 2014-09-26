@@ -3,11 +3,9 @@ package registry;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-
 import messages.LookupRequest;
 import messages.LookupResponse;
-
-import remoteobject.RemoteObject;
+import remoteobject.RemoteStub;
 
 public class LookupRegistry {
 
@@ -19,7 +17,7 @@ public class LookupRegistry {
 		registryPort = port;
 	}
 	
-	public RemoteObject lookup(String name) {
+	public RemoteStub lookup(String name) {
 		try {
 			Socket connection = new Socket(registryHost, registryPort);
 			ObjectOutputStream out = new ObjectOutputStream(connection.getOutputStream());
@@ -28,7 +26,7 @@ public class LookupRegistry {
 			out.writeObject(newRequest);
 			LookupResponse response = (LookupResponse)in.readObject();
 			connection.close();
-			return (RemoteObject)response.getRtrnVal();
+			return (RemoteStub)response.getRtrnVal();
 		} catch (Exception e) {
 			return null;
 		}
