@@ -15,6 +15,12 @@ public class FirstPartyClient {
 		
 		// Lookup people living on the server
 		
+		// Fill the party
+		
+		// Get the names of everyone at the party
+		
+		// Check if anyone is on the party list twice
+		
 
 		
 	}

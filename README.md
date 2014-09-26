@@ -16,6 +16,7 @@ TODO
 Client
 Tests
 -RemoteObject
+People (w/ RemoteException)
 
 Server
 Registry

@@ -7,7 +7,7 @@ public class PersonImpl implements Person, RemoteObject  {
 	// Method strings
 	private static final String METHOD_GET_NAME = "getName";
 	private static final String METHOD_EQUALS = "equals";
-	private static final String METHOD_HACSH_CODE = "hashCode";
+	private static final String METHOD_HASH_CODE = "hashCode";
 	
 	private String name;
 
@@ -54,7 +54,7 @@ public class PersonImpl implements Person, RemoteObject  {
 			}
 			return (Object) this.equals(args[0]);		
 			
-		} else if (methodName == METHOD_HACSH_CODE) {
+		} else if (methodName == METHOD_HASH_CODE) {
 			if (args != null) {
 				throw new IllegalArgumentException("No arguments for hashCode");
 			}

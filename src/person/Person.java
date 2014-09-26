@@ -2,8 +2,7 @@ package person;
 
 public interface Person {
 	
-	public abstract String getName();
-	public abstract boolean equals(Object obj);
-	public abstract int hashCode();
+	public abstract String getName() throws Exception;
+	public abstract boolean samePerson(Person person) throws Exception;
 	
 }

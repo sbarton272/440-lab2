@@ -53,8 +53,7 @@ public abstract class RemoteStub implements Serializable {
 	 * @return Generic response object, the caller will need to cast to the
 	 *         correct type
 	 */
-	public Object callRemoteMethod(String methodName, Object[] args)
-			throws RemoteException {
+	public Object callRemoteMethod(String methodName, Object[] args) {
 
 		// Create message to send over
 		Request request = new CallRequest(objName, methodName, args,
@@ -95,4 +94,10 @@ public abstract class RemoteStub implements Serializable {
 		return callRemoteMethod(methodName, null);
 	}
 
+	public Object callRemoteMethod(String methodName, Object arg) throws RemoteException {
+		Object[] args = {arg};
+		return callRemoteMethod(methodName, args);
+	}
+
+	
 }
