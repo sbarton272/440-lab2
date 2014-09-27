@@ -13,10 +13,10 @@ Extras
 TODO
 ====
 
-Client
-Tests
+-Client
+-Tests
 -RemoteObject
-People (w/ RemoteException)
+-People (w/ RemoteException)
 
 Server
 Registry

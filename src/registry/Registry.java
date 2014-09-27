@@ -14,6 +14,7 @@ import remoteobject.RemoteStub;
 public class Registry {
 
 	private Map<String, RemoteObjectPair> registry;
+	public static final int DEFAULT_PORT = 5050;
 	
 	public Registry(){
 		registry = new HashMap<String, RemoteObjectPair>();
@@ -40,15 +41,15 @@ public class Registry {
 			//get stub
 			RemoteObjectPair pair = registry.get(objName);
 			RemoteStub remoteObj = pair.getRemoteStub();
-			response = new LookupResponse(null, remoteObj);
+			response = new LookupResponse(remoteObj);
 			
 		} catch (Exception e) {
-			response = new LookupResponse(e, null);
+			response = new LookupResponse(e);
 		}
 		try {
 			//send back via Socket
 			out.writeObject(response);
-			//DO I WANT TO CLOSE HERE???
+			//DO I WANT TO CLOSE HERE???, Does this close out and in as well?
 			connected.close();
 		} catch (IOException e) {
 			//cannot communicate successfully over socket

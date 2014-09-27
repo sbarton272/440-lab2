@@ -37,7 +37,8 @@ public class Server {
 		//should registry somehow be a separate running process, or is this ok?
 		registry = new Registry();
 		//set arbitrary but constant port values, must be different!
-		registryPort = 4444;
+		registryPort = Registry.DEFAULT_PORT;
+		// TODO separate out dispatcher?
 		requestPort = 4445;
 
 		// Initiate a few remote objects to live on the server
@@ -134,8 +135,14 @@ public class Server {
 			Object[] args = request.getArgs();
 			RemoteObject obj = (RemoteObject)registry.localLookup(objName);
 			//call method
-			Object returnVal = obj.callMethod(method, args);
-			CallResponse response = new CallResponse(null, returnVal);
+			CallResponse response;
+			try {
+				Object returnVal = obj.callMethod(method, args);
+				response = new CallResponse(returnVal);
+			} catch (Exception e) {
+				response = new CallResponse(e);
+			}
+
 			out.writeObject(response);
 			callSocket.close();
 		} catch (Exception e) {

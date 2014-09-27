@@ -2,24 +2,11 @@ package messages;
 
 public class LookupRequest implements Request {
 	
-	private String hostName;
-	private int port;
+	private static final long serialVersionUID = -4286865909301260197L;
 	private String objName;
 	
-	public LookupRequest(String host, int prt, String obj){
-		hostName = host;
-		port = prt;
+	public LookupRequest(String obj){
 		objName = obj;
-	}
-
-	@Override
-	public String getHostname() {
-		return hostName;
-	}
-
-	@Override
-	public int getPort() {
-		return port;
 	}
 
 	@Override
