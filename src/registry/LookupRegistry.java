@@ -26,7 +26,12 @@ public class LookupRegistry {
 			out.writeObject(newRequest);
 			LookupResponse response = (LookupResponse)in.readObject();
 			connection.close();
-			return (RemoteStub)response.getRtrnVal();
+
+			// Set the host and port (use default) for the stub so that it knows where it lives
+			RemoteStub stub = (RemoteStub)response.getRtrnVal();
+			stub.setClientInfo(registryHost);
+			
+			return stub;
 		} catch (Exception e) {
 			return null;
 		}

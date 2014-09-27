@@ -4,12 +4,12 @@ import registry.LookupRegistry;
 
 public class FirstPartyClient {
 
-	private int responsePort;
-	private LookupRegistry lookupRegistry;
+	private static LookupRegistry lookupRegistry;
 	
 	public static void main(String[] args) {
 		
 		// Create a registry to lookup remote objects
+		lookupRegistry = new LookupRegistry(null, responsePort);
 		
 		// Generate a few people living on this device
 		

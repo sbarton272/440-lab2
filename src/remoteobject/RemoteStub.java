@@ -10,6 +10,9 @@ import messages.CallResponse;
 import messages.CallRequest;
 import messages.Request;
 
+/**
+ * This object serves as a reference to the base object 
+ */
 public abstract class RemoteStub implements Serializable {
 
 	private static final long serialVersionUID = -5413378162184283924L;
@@ -18,7 +21,6 @@ public abstract class RemoteStub implements Serializable {
 	private int clientPort;
 	private String serverHost;
 	private int serverPort;
-
 	private static final int DEFAULT_CLIENT_PORT = 8888;
 
 	public RemoteStub(String objName, String serverHost, int serverPort) {
@@ -52,15 +54,17 @@ public abstract class RemoteStub implements Serializable {
 	 * @param args
 	 * @return Generic response object, the caller will need to cast to the
 	 *         correct type
+	 * @throws RemoteException
 	 */
-	public Object callRemoteMethod(String methodName, Object[] args) {
+	public Object callRemoteMethod(String methodName, Object[] args)
+			throws RemoteException {
 
 		// Create message to send over
 		Request request = new CallRequest(objName, methodName, args,
 				clientHost, clientPort);
 
 		try {
-			
+
 			// Open socket to server
 			Socket soc = new Socket(serverHost, serverPort);
 
@@ -78,26 +82,30 @@ public abstract class RemoteStub implements Serializable {
 			outStream.close();
 			inStream.close();
 			soc.close();
-			
+
+			// If return message was an exception, throw exception
+			if (response.isException()) {
+				throw response.getException();
+			}
+
 			// Extract and return response value as generic object
 			return response.getRtrnVal();
 
 		} catch (Exception e) {
-			
+
 			// Catch all errors and handle as a RemoteException
 			throw (new RemoteException(e.getMessage()));
 		}
 	}
-	
-	public Object callRemoteMethod(String methodName)
-			throws RemoteException {
+
+	public Object callRemoteMethod(String methodName) throws RemoteException {
 		return callRemoteMethod(methodName, null);
 	}
 
-	public Object callRemoteMethod(String methodName, Object arg) throws RemoteException {
-		Object[] args = {arg};
+	public Object callRemoteMethod(String methodName, Object arg)
+			throws RemoteException {
+		Object[] args = { arg };
 		return callRemoteMethod(methodName, args);
 	}
 
-	
 }

@@ -1,5 +1,7 @@
 package remoteobject;
 
+import java.rmi.RemoteException;
+
 /**
  * This object is the base object which actually sits on the server.
  * 
@@ -13,8 +15,9 @@ public interface RemoteObject {
 	 * 
 	 * @param methodName
 	 * @param args
+	 * @throws IllegalArgumentException, RemoteException 
 	 */
 	public Object callMethod(String methodName, Object[] args)
-			throws IllegalArgumentException;
+			throws IllegalArgumentException, IllegalArgumentException, RemoteException;
 
 }
