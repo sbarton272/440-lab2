@@ -108,7 +108,7 @@ public class Server {
 	private static void generateTest() {
 		try {
 			FileInputStream inFile = new FileInputStream(peopleFile);
-			BufferedReader reader = new BufferedFileReader(inFile); // TODO don't remember class
+			BufferedReader reader = new BufferedStream(inFile); // TODO don't remember class
 
 			// Read all people names from file and create objects for each
 			String name = reader.readLine();
