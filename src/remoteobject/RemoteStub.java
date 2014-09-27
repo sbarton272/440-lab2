@@ -60,6 +60,7 @@ public abstract class RemoteStub implements Serializable {
 			CallResponse response = (CallResponse) inStream.readObject();
 
 			// Close streams
+			// TODO can I get away with only calling soc.close?
 			outStream.close();
 			inStream.close();
 			soc.close();

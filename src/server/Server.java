@@ -134,7 +134,8 @@ public class Server {
 			String method = request.getMethodName();
 			Object[] args = request.getArgs();
 			RemoteObject obj = (RemoteObject)registry.localLookup(objName);
-			//call method
+			
+			// Call method and return value or errors
 			CallResponse response;
 			try {
 				Object returnVal = obj.callMethod(method, args);
