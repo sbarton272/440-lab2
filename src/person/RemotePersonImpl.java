@@ -25,13 +25,13 @@ public class RemotePersonImpl implements RemotePerson, RemoteObject  {
 	}
 	
 	public Object callMethod(String methodName, Object[] args) throws IllegalArgumentException, RemoteException {
-		if (methodName == METHOD_GET_NAME) {
+		if (methodName.equals(METHOD_GET_NAME)) {
 			if (args != null) {
 				throw new IllegalArgumentException("No arguments for getName");
 			}
 			return (Object) getName();
 			
-		} else if (methodName == METHOD_SAME_PERSON) {
+		} else if (methodName.equals(METHOD_SAME_PERSON)) {
 			if (args.length != 1) {
 				throw new IllegalArgumentException("One argument for samePerson");
 			}
