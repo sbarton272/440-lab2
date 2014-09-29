@@ -61,6 +61,7 @@ public class FirstPartyClient {
 				System.out.print(person.getName() + " ");
 			} catch (RemoteException e) {
 				System.out.println("Oops someone couldn't make it");
+				return;
 			}
 		}
 

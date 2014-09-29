@@ -74,7 +74,8 @@ public class Server {
 		}
 		
 		//constantly accept call requests
-		try {
+		try 
+			// TODO where/when/if to close server sockets
 			final ServerSocket callSocket = new ServerSocket(requestPort);
 			Thread callThread = new Thread(new Runnable(){
 				public void run(){
@@ -83,7 +84,7 @@ public class Server {
 							final Socket connection = callSocket.accept();
 							Thread runThread = new Thread(new Runnable(){
 								public void run(){
-									handleRequest(connection, callSocket);
+									handleRequest(connection);
 								}
 							});
 							runThread.start();
@@ -121,7 +122,7 @@ public class Server {
 
 	}
 
-	private static void handleRequest(Socket connection, ServerSocket callSocket) {
+	private static void handleRequest(Socket connection) {
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(connection.getOutputStream());
 			ObjectInputStream in = new ObjectInputStream(connection.getInputStream());
@@ -141,7 +142,7 @@ public class Server {
 			}
 
 			out.writeObject(response);
-			callSocket.close();
+			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
