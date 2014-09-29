@@ -1,5 +1,5 @@
-Sam
-Bert
-Ernie
-Elain
-Robert
+sam
+bert
+ernie
+elain
+robert

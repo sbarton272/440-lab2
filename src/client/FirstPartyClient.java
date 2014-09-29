@@ -16,22 +16,24 @@ public class FirstPartyClient {
 
 		// TODO may be way to determine host name without need for user to
 		// specify
-		if (args.length != 2) {
-			System.out.println("Please specify client host name");
+		if (args.length != 1) {
+			System.out.println("Please specify server host name");
 			return;
 		}
-		String hostName = args[1];
+		String hostName = args[0];
 
 		// Create a registry to lookup remote objects
 		lookupRegistry = new LookupRegistry(hostName);
 
 		// Generate a few people living on this device
+		System.out.println("Creating local people");
 		RemotePerson sally = new RemotePersonImpl("sally");
 		RemotePerson ben = new RemotePersonImpl("ben");
 		RemotePerson jim = new RemotePersonImpl("jim");
 		RemotePerson localRobert = new RemotePersonImpl("robert");
 
 		// Lookup people living on the server
+		System.out.println("Getting remote people");
 		RemotePerson elain;
 		RemotePerson remoteRobert;
 		try {

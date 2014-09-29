@@ -1,8 +1,7 @@
 package server;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,17 +20,16 @@ public class Server {
 	private static Registry registry;
 	private static int registryPort;
 	private static int requestPort;
-	private static final String peopleFile = "client/people.txt";
+	private static final String peopleFile = "src/client/people.txt";
 	private static String serverHost;
 	
 	public static void main(String[] args) {
 		
-		// TODO may be way to determine host name without need for user to specify
-		if (args.length != 2) {
+		if (args.length != 1) {
 			System.out.println("Please specify server host name");
 			System.exit(0);
 		}
-		serverHost = args[1];
+		serverHost = args[0];
 		
 		// TODO
 		//should registry somehow be a separate running process, or is this ok?
@@ -44,22 +42,21 @@ public class Server {
 		// Initiate a few remote objects to live on the server
 		generateTest();
 		
+		System.out.println("Server online");
+		
 		//constantly accept registry requests
 		try {
 			final ServerSocket registrySocket = new ServerSocket(registryPort);
+
 			Thread registryThread = new Thread(new Runnable(){
 				public void run(){
+
 					while (true){
 						try {
 							final Socket connection = registrySocket.accept();
 							Thread lookupThread = new Thread(new Runnable(){
 								public void run(){
 									registry.LookupHandler(connection);
-									try {
-										registrySocket.close();
-									} catch (IOException e) {
-										e.printStackTrace();
-									}
 								}
 							});
 							lookupThread.start();
@@ -67,6 +64,7 @@ public class Server {
 							e1.printStackTrace();
 						}
 					}
+					
 				}
 			});
 			registryThread.start();
@@ -107,8 +105,7 @@ public class Server {
 	
 	private static void generateTest() {
 		try {
-			FileInputStream inFile = new FileInputStream(peopleFile);
-			BufferedReader reader = new BufferedStream(inFile); // TODO don't remember class
+			BufferedReader reader = new BufferedReader(new FileReader(peopleFile));
 
 			// Read all people names from file and create objects for each
 			String name = reader.readLine();
@@ -118,8 +115,7 @@ public class Server {
 			}
 			
 			reader.close();
-			inFile.close();
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			System.err.println("Unable to open people file");
 		}
 
