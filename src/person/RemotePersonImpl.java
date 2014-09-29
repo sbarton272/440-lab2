@@ -6,6 +6,8 @@ import remoteobject.RemoteObject;
 
 public class RemotePersonImpl implements RemotePerson, RemoteObject  {
 
+	private static final long serialVersionUID = -2634843163470118006L;
+
 	// Method strings
 	private static final String METHOD_GET_NAME = "getName";
 	private static final String METHOD_SAME_PERSON = "samePerson";
@@ -21,7 +23,7 @@ public class RemotePersonImpl implements RemotePerson, RemoteObject  {
 	}
 	
 	public boolean samePerson(RemotePerson person) throws RemoteException {
-        return name.equals(((RemotePerson) person).getName()); 
+        return name.equals(person.getName()); 
 	}
 	
 	public Object callMethod(String methodName, Object[] args) throws IllegalArgumentException, RemoteException {

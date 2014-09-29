@@ -55,7 +55,7 @@ public class FirstPartyClient {
 		party.add(remoteRobert);
 
 		// Get the names of everyone at the party
-		System.out.println("These people are at the party");
+		System.out.println("These people are at the party:");
 		for (RemotePerson person : party) {
 			try {
 				System.out.print(person.getName() + " ");
@@ -64,7 +64,8 @@ public class FirstPartyClient {
 				return;
 			}
 		}
-
+		System.out.println();
+		
 		// Check if anyone is on the party list twice (the client shouldn't care
 		// where the objects live
 		try {
