@@ -13,11 +13,16 @@ Extras
 TODO
 ====
 
--Client
--Tests
--RemoteObject
--People (w/ RemoteException)
-
+Completed:
+Client
+Tests
+RemoteObject
+People (w/ RemoteException)
 Server
 Registry
 Message
+
+Questions
+=========
+
+RemoteException for default methods
