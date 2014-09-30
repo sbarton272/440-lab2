@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 
 public interface RemotePerson extends Serializable {
 	
-	public abstract String getName() throws RemoteException;
-	public abstract boolean samePerson(RemotePerson person) throws RemoteException;
+	public String getName() throws RemoteException;
+	public boolean samePerson(RemotePerson person) throws RemoteException;
 	
 }

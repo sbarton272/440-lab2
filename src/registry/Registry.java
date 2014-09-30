@@ -43,6 +43,9 @@ public class Registry {
 			RemoteStub remoteObj = pair.getRemoteStub();
 			response = new LookupResponse(remoteObj);
 			
+			// Debug print
+			System.out.println("Registry lookup: " + objName);
+			
 		} catch (Exception e) {
 			response = new LookupResponse(e);
 		}
