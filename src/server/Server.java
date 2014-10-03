@@ -31,12 +31,9 @@ public class Server {
 		}
 		serverHost = args[0];
 
-		// TODO
-		// should registry somehow be a separate running process, or is this ok?
 		registry = new Registry();
 		// set arbitrary but constant port values, must be different!
 		registryPort = Registry.DEFAULT_PORT;
-		// TODO separate out dispatcher?
 		requestPort = 4445;
 
 		// Initiate a few remote objects to live on the server
@@ -71,13 +68,12 @@ public class Server {
 			});
 			registryThread.start();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		// constantly accept call requests
 		try {
-			// TODO where/when/if to close server sockets
+			// TODO ASK where/when/if to close server sockets
 			final ServerSocket callSocket = new ServerSocket(requestPort);
 			Thread callThread = new Thread(new Runnable() {
 				@Override
@@ -100,10 +96,7 @@ public class Server {
 			});
 			callThread.start();
 
-			// take in user input??
-
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

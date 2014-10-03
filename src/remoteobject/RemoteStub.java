@@ -6,19 +6,19 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-import messages.CallResponse;
 import messages.CallRequest;
+import messages.CallResponse;
 import messages.Request;
 
 /**
- * This object serves as a reference to the base object 
+ * This object serves as a reference to the base object
  */
 public abstract class RemoteStub implements Serializable {
 
 	private static final long serialVersionUID = -5413378162184283924L;
-	private String objName;
-	private String serverHost;
-	private int serverPort;
+	private final String objName;
+	private final String serverHost;
+	private final int serverPort;
 
 	public RemoteStub(String objName, String serverHost, int serverPort) {
 		this.objName = objName;
@@ -52,7 +52,7 @@ public abstract class RemoteStub implements Serializable {
 					soc.getOutputStream());
 			ObjectInputStream inStream = new ObjectInputStream(
 					soc.getInputStream());
-			
+
 			// Send request
 			outStream.writeObject(request);
 
@@ -60,9 +60,6 @@ public abstract class RemoteStub implements Serializable {
 			CallResponse response = (CallResponse) inStream.readObject();
 
 			// Close streams
-			// TODO can I get away with only calling soc.close?
-			outStream.close();
-			inStream.close();
 			soc.close();
 
 			// If return message was an exception, throw exception

@@ -14,8 +14,6 @@ public class FirstPartyClient {
 
 	public static void main(String[] args) {
 
-		// TODO may be way to determine host name without need for user to
-		// specify
 		if (args.length != 1) {
 			System.out.println("Please specify server host name");
 			return;
