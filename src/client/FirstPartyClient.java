@@ -65,15 +65,15 @@ public class FirstPartyClient {
 			}
 		}
 		System.out.println();
-		
+
 		// Check if anyone is on the party list twice (the client shouldn't care
 		// where the objects live
 		try {
 			System.out.println("Was Robert was double counted? "
 					+ localRobert.samePerson(remoteRobert));
 			System.out
-					.println("To check again, was Robert was double counted? "
-							+ remoteRobert.samePerson(localRobert));
+			.println("To check again, was Robert was double counted? "
+					+ remoteRobert.samePerson(localRobert));
 			System.out.println("Are Elain and Robert the same person? "
 					+ remoteRobert.samePerson(elain));
 		} catch (RemoteException e) {
