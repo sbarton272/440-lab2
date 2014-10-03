@@ -30,30 +30,32 @@
 
 \section{Implementation State}
 
-- Done
-- Extras we didn't complete (Compiler, skeleton, loading class files) and how easy it would be to add them
-(Spencer)
+We completed the basic requirements.
+
+The extras that were not added include a skeleton, compiler and loading class files. We chose not to implement skeletons as we were able to add that the necessary methods within \texttt{RemoteObject}.
+
+In order to add a compiler the design would not need to change. When performing a registry lookup a remote object stub is returned. Currently this remote object stub must be instantiated earlier by the server. With a compiler this would simply be replaced by a call to the compiler during an object lookup.
+
+Finally support for loading class files would require a little more work since another server socket would need to be implemented on the host the .class files. Beyond that the remote object stub would handle a .class request and another type of message could be implemented to handle this communication.
 
 %------------------------------------------
 
 \section{Running the Project}
 
 - Instructions (example run)
-- CHECK works andrew machines
+- CHECK works Andrew machines
 (Emma)
 
 %------------------------------------------
 
 \section{Dependencies}
 
-- None
-(Spencer)
+There are no dependencies.
 
 %------------------------------------------
 
 \section{Testing}
 
-- Run our test
-(Spencer)
+Our test in built into \texttt{PartyClient}. It automatically runs when \texttt{PartyClient} is run. The test runs each of the methods in the \texttt{Person} object for both a remote and local implementation. \texttt{Person.samePerson} is run using both remote and local objects as arguments to check that the server-side remote object implementation can handle either object type as an argument.
 
 \end{document}

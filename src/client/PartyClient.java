@@ -8,7 +8,7 @@ import person.RemotePerson;
 import person.RemotePersonImpl;
 import registry.LookupRegistry;
 
-public class FirstPartyClient {
+public class PartyClient {
 
 	private static LookupRegistry lookupRegistry;
 
