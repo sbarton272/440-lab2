@@ -34,6 +34,7 @@ In order to lookup a remote object the client uses their \texttt{LookupRegistry}
 
 \includegraphics[scale=.3]{callMethod.png}
 
+Remote object invocation begins with the client calling a method on a \texttt{RemoteObjectStub}. This call is then abstracted and a \texttt{CallRequest} message is generated with the object name, method name and arguments list. This message travels over the network to the server where the actual object lives. The relevant method is call and the return values is sent back to the client and returned from the original stub method invocation.
 
 %------------------------------------------
 
