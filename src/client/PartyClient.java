@@ -43,6 +43,15 @@ public class PartyClient {
 			return;
 		}
 
+		// Lookup non-existent person
+		RemotePerson theInvisibleMan = null;
+		try {
+			theInvisibleMan = (RemotePerson) lookupRegistry.lookup("theInvisibleMan");
+			System.out.println("Got theInvisibleMan " + theInvisibleMan);
+		} catch (RemoteException e1) {
+			System.out.println("Good - unable to find non-existent remote person");
+		}
+
 		// Fill the party
 		List<RemotePerson> party = new LinkedList<RemotePerson>();
 		party.add(sally);
@@ -76,6 +85,15 @@ public class PartyClient {
 					+ remoteRobert.samePerson(elain));
 		} catch (RemoteException e) {
 			System.out.println("Oops someone went missing");
+			return;
+		}
+
+		// Check that an exception is returned for bad people
+		try {
+			System.out.println("Do we get an error? "
+					+ remoteRobert.samePerson(theInvisibleMan));
+		} catch (Exception e) {
+			System.out.println("Good we got an exception " + e.getCause() );
 		}
 	}
 

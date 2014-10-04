@@ -11,18 +11,18 @@ import remoteobject.RemoteStub;
 
 public class LookupRegistry {
 
-	private String registryHost;
+	private final String registryHost;
 	private int registryPort = Registry.DEFAULT_PORT;
-	
+
 	public LookupRegistry(String host, int port){
 		registryHost = host;
 		registryPort = port;
 	}
-	
+
 	public LookupRegistry(String host){
 		registryHost = host;
 	}
-	
+
 	public RemoteStub lookup(String name) throws RemoteException {
 		try {
 			Socket connection = new Socket(registryHost, registryPort);
@@ -33,10 +33,19 @@ public class LookupRegistry {
 			LookupResponse response = (LookupResponse)in.readObject();
 			connection.close();
 
+			// If return message was an exception, throw exception
+			if (response.isException()) {
+				throw response.getException();
+			}
+
 			return (RemoteStub)response.getRtrnVal();
+
 		} catch (Exception e) {
-			throw new RemoteException();
+
+			// Catch all errors and handle as a RemoteException
+			throw (new RemoteException(e.getMessage()));
 		}
+
 	}
-	
+
 }

@@ -24,7 +24,16 @@
 - UML diagram (Emma)
 - Why no skeleton
 
-- Flow charts (Lookup, Call method, call method with error response) (Spencer)
+\subsection*{Registry Lookup}
+
+\includegraphics[scale=.4]{Lookup.png}
+
+In order to lookup a remote object the client uses their \texttt{LookupRegistry} to lookup an object by name string. The \texttt{LookupRegistry} creates a \texttt{LookupRequest} with the object name. This is sent to the server which looks up the object by name in its registry. If the object exists, a \texttt{RemoteObjectStub} is returned through a \texttt{LookupResponse} else the \texttt{LookupResponse} comes back with an exception.
+
+\subsection*{Remote Method Invocation}
+
+\includegraphics[scale=.3]{callMethod.png}
+
 
 %------------------------------------------
 
