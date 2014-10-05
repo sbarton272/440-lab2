@@ -5,8 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import messages.CallRequest;
 import messages.CallResponse;
@@ -20,16 +22,10 @@ public class Server {
 	private static Registry registry;
 	private static int registryPort;
 	private static int requestPort;
-	private static final String PEOPLE_FILE = "src/client/people.txt";
+	private static final String PEOPLE_FILE = System.getProperty("user.dir")+"/../client/people.txt";
 	private static String serverHost;
 
 	public static void main(String[] args) {
-
-		if (args.length != 1) {
-			System.out.println("Please specify server host name");
-			System.exit(0);
-		}
-		serverHost = args[0];
 
 		registry = new Registry();
 		// set arbitrary but constant port values, must be different!
@@ -39,7 +35,13 @@ public class Server {
 		// Initiate a few remote objects to live on the server
 		generateTest();
 
-		System.out.println("Server online");
+		try {
+			serverHost = InetAddress.getLocalHost().getHostName();
+			System.out.println("Server online at " + serverHost + ":" + requestPort);
+		} catch (UnknownHostException e2) {
+			System.out.println("Unable to determine hostname");
+			return;
+		}
 
 		// constantly accept registry requests
 		try {

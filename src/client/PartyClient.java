@@ -76,12 +76,12 @@ public class PartyClient {
 		// Check if anyone is on the party list twice (the client shouldn't care
 		// where the objects live
 		try {
-			System.out.println("Was Robert was double counted? "
+			System.out.println("Was Robert was double counted (true)? "
 					+ localRobert.samePerson(remoteRobert));
 			System.out
-			.println("To check again, was Robert was double counted? "
+			.println("To check again, was Robert was double counted (true)? "
 					+ remoteRobert.samePerson(localRobert));
-			System.out.println("Are Elain and Robert the same person? "
+			System.out.println("Are Elain and Robert the same person (false)? "
 					+ remoteRobert.samePerson(elain));
 		} catch (RemoteException e) {
 			System.out.println("Oops someone went missing");
@@ -90,7 +90,7 @@ public class PartyClient {
 
 		// Check that an exception is returned for bad people
 		try {
-			System.out.println("Do we get an error? "
+			System.out.println("Oops we didn't get an error?"
 					+ remoteRobert.samePerson(theInvisibleMan));
 		} catch (Exception e) {
 			System.out.println("Good we got an exception " + e.getCause() );
