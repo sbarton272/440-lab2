@@ -1,6 +1,7 @@
 package server;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,7 +23,8 @@ public class Server {
 	private static Registry registry;
 	private static int registryPort;
 	private static int requestPort;
-	private static final String PEOPLE_FILE = System.getProperty("user.dir")+"/client/people.txt";
+	private static final String PEOPLE_FILE = System.getProperty("user.dir")
+			+ File.separator + "client" + File.separator + "people.txt";
 	private static String serverHost;
 
 	public static void main(String[] args) {
@@ -30,14 +32,15 @@ public class Server {
 		registry = new Registry();
 		// set arbitrary but constant port values, must be different!
 		registryPort = Registry.DEFAULT_PORT;
-		requestPort = 4445;
+		requestPort = registryPort + 1;
 
 		// Initiate a few remote objects to live on the server
 		generateTest();
 
 		try {
 			serverHost = InetAddress.getLocalHost().getHostName();
-			System.out.println("Server online at " + serverHost + ":" + requestPort);
+			System.out.println("Server online at " + serverHost + ":"
+					+ requestPort);
 		} catch (UnknownHostException e2) {
 			System.out.println("Unable to determine hostname");
 			return;
