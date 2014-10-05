@@ -34,9 +34,6 @@ public class Server {
 		registryPort = Registry.DEFAULT_PORT;
 		requestPort = registryPort + 1;
 
-		// Initiate a few remote objects to live on the server
-		generateTest();
-
 		try {
 			serverHost = InetAddress.getLocalHost().getHostName();
 			System.out.println("Server online at " + serverHost + ":"
@@ -45,6 +42,9 @@ public class Server {
 			System.out.println("Unable to determine hostname");
 			return;
 		}
+
+		// Initiate a few remote objects to live on the server
+		generateTest();
 
 		// constantly accept registry requests
 		try {
