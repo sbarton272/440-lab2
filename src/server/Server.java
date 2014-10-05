@@ -22,7 +22,7 @@ public class Server {
 	private static Registry registry;
 	private static int registryPort;
 	private static int requestPort;
-	private static final String PEOPLE_FILE = System.getProperty("user.dir")+"/../client/people.txt";
+	private static final String PEOPLE_FILE = System.getProperty("user.dir")+"/client/people.txt";
 	private static String serverHost;
 
 	public static void main(String[] args) {
@@ -150,7 +150,7 @@ public class Server {
 
 			reader.close();
 		} catch (IOException e) {
-			System.err.println("Unable to open people file");
+			System.err.println("Unable to open people file at " + PEOPLE_FILE);
 		}
 	}
 
