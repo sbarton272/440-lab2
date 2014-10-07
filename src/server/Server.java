@@ -57,6 +57,7 @@ public class Server {
 					while (true) {
 						try {
 							final Socket connection = registrySocket.accept();
+							System.out.println("Server received registry lookup request");
 							Thread lookupThread = new Thread(new Runnable() {
 								@Override
 								public void run() {
@@ -78,7 +79,6 @@ public class Server {
 
 		// constantly accept call requests
 		try {
-			// TODO ASK where/when/if to close server sockets
 			final ServerSocket callSocket = new ServerSocket(requestPort);
 			Thread callThread = new Thread(new Runnable() {
 				@Override
@@ -86,6 +86,7 @@ public class Server {
 					while (true) {
 						try {
 							final Socket connection = callSocket.accept();
+							System.out.println("Server received method call request");
 							Thread runThread = new Thread(new Runnable() {
 								@Override
 								public void run() {
@@ -119,7 +120,7 @@ public class Server {
 			RemoteObject obj = registry.localLookup(objName);
 
 			// Debug print
-			System.out.println("Request: " + objName + "." + method + "("
+			System.out.println("Remote method call request: " + objName + "." + method + "("
 					+ args + ")");
 
 			// Call method and return value or errors
