@@ -39,6 +39,8 @@ public abstract class RemoteStub implements Serializable {
 	public Object callRemoteMethod(String methodName, Object[] args)
 			throws RemoteException {
 
+		System.out.println("Remote method call: calling "+methodName+" on "+objName);
+		
 		// Create message to send over
 		Request request = new CallRequest(objName, methodName, args);
 
@@ -67,11 +69,13 @@ public abstract class RemoteStub implements Serializable {
 				throw response.getException();
 			}
 
+			System.out.println("Remote method call result: "+response.getRtrnVal());
 			// Extract and return response value as generic object
 			return response.getRtrnVal();
 
 		} catch (Exception e) {
 
+			System.out.println("Remote method call exception: "+e);
 			// Catch all errors and handle as a RemoteException
 			throw (new RemoteException(e.getMessage()));
 		}

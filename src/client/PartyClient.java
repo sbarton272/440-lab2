@@ -29,6 +29,7 @@ public class PartyClient {
 		RemotePerson ben = new RemotePersonImpl("ben");
 		RemotePerson jim = new RemotePersonImpl("jim");
 		RemotePerson localRobert = new RemotePersonImpl("robert");
+		System.out.println();
 
 		// Lookup people living on the server
 		System.out.println("Getting remote people");
@@ -62,31 +63,36 @@ public class PartyClient {
 		party.add(remoteRobert);
 
 		// Get the names of everyone at the party
+		System.out.println();
 		System.out.println("These people are at the party:");
+		String names = "";
 		for (RemotePerson person : party) {
 			try {
-				System.out.print(person.getName() + " ");
+				names += person.getName() + " ";
 			} catch (RemoteException e) {
+				System.out.println(names);
 				System.out.println("Oops someone couldn't make it");
 				return;
 			}
 		}
+		System.out.println(names);
 		System.out.println();
 
 		// Check if anyone is on the party list twice (the client shouldn't care
 		// where the objects live
 		try {
-			System.out.println("Was Robert was double counted (true)? "
+			System.out.println("Was Robert double counted (should be true)? "
 					+ localRobert.samePerson(remoteRobert));
 			System.out
-			.println("To check again, was Robert was double counted (true)? "
+			.println("To check again, was Robert double counted (should be true)? "
 					+ remoteRobert.samePerson(localRobert));
-			System.out.println("Are Elain and Robert the same person (false)? "
+			System.out.println("Are Elain and Robert the same person (should be false)? "
 					+ remoteRobert.samePerson(elain));
 		} catch (RemoteException e) {
 			System.out.println("Oops someone went missing");
 			return;
 		}
+		System.out.println();
 
 		// Check that an exception is returned for bad people
 		try {

@@ -29,15 +29,18 @@ public class LookupRegistry {
 			ObjectOutputStream out = new ObjectOutputStream(connection.getOutputStream());
 			ObjectInputStream in = new ObjectInputStream(connection.getInputStream());
 			LookupRequest newRequest = new LookupRequest(name);
+			System.out.println("Sending lookup request from client to registry...");
 			out.writeObject(newRequest);
 			LookupResponse response = (LookupResponse)in.readObject();
 			connection.close();
 
 			// If return message was an exception, throw exception
 			if (response.isException()) {
+				System.out.println("Lookup request exception: "+response.getException());
 				throw response.getException();
 			}
 
+			System.out.println("Lookup request result: "+response.getRtrnVal());
 			return (RemoteStub)response.getRtrnVal();
 
 		} catch (Exception e) {

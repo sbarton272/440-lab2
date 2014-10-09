@@ -33,6 +33,7 @@ public class Registry {
 			e.printStackTrace();
 			return;
 		}
+		System.out.println("Registry is performing lookup.");
 		LookupRequest request;
 		LookupResponse response;
 		try {
@@ -47,6 +48,7 @@ public class Registry {
 			System.out.println("Registry lookup: " + objName);
 			
 		} catch (Exception e) {
+			System.out.println("Registry lookup exception: "+e);
 			response = new LookupResponse(e);
 		}
 		try {
@@ -65,7 +67,7 @@ public class Registry {
 		registry.put(objName, newPair);
 	}
 	
-	//new function, make sense?
+	//handles local lookups
 	public RemoteObject localLookup(String objName){
 		RemoteObjectPair vals = registry.get(objName);
 		return vals.getObj();

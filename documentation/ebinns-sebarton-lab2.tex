@@ -10,6 +10,8 @@
 
 \usepackage{graphicx}
 \usepackage[compact]{titlesec}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{\baselineskip}
@@ -18,11 +20,14 @@
 \maketitle
 
 %------------------------------------------
-
+\pagebreak
 \section{Design}
 
-- UML diagram (Emma)
-- Why no skeleton
+Here is a UML diagram to illustrate our design:
+
+\includegraphics[scale=.44]{UMLsized.png} \\
+
+We decided not to implement any server skeletons and instead to incorporate the functionality of a dispatcher into our server. We chose to do this because, as stated in the handout, the process to handle remote method calls is not dependent on the specific object the method is being called on. Therefore, it made more sense to us for our server to include the functionality of a dispatcher rather than having each stub require a corresponding skeleton.
 
 \subsection*{Registry Lookup}
 
@@ -52,9 +57,75 @@ Finally support for loading class files would require a little more work since a
 
 \section{Running the Project}
 
-- Instructions (example run)
-- CHECK works Andrew machines
-(Emma)
+Here are the instructions to run our project on the Andrew machines using the provided example client/remote object code for testing: 
+
+\begin{enumerate}
+	\item{Navigate in a terminal to the directory containing our project, then navigate to the "src" folder within our project.}
+	\item{Run the command: \verb|python SETUP.py| \\ (This command should print out commands to run the server and client.)}
+	\item{From this "src" folder, run the server using the command: \verb|java server/Server| \\ (This command should print out: \verb|Server online at <hostname:port>|)}
+	\item{In another terminal window (connected to a different server or the same one, whichever you prefer), navigate to the "src" folder as you did before. Then run the command: \verb|java client/PartyClient <hostname>| where \verb|<hostname>| is the hostname printed out when you ran the server above (this is the hostname corresponding to where you're running the server; ex: unix1.andrew.cmu.edu)}
+\end{enumerate}
+
+When you run the client, several lines should print out, both in the server window and the client window. These are the results of built in tests we've written that run automatically when you start the client. To check that our project works, we've provided thorough print statements of what is occurring at each step of the process. If our project functions correctly, this is what should print out:
+
+\begin{align*}
+	&\text{In the client window:} \\
+	&\texttt{Creating local people} \\ \\
+	&\texttt{Getting remote people} \\
+	&\texttt{Sending lookup request from client to registry...} \\
+	&\texttt{Lookup request result: <specific RemotePersonStub object>} \\
+	&\texttt{Sending lookup request from client to registry...} \\
+	&\texttt{Lookup request result: <specific RemotePersonStub>} \\
+	&\texttt{Sending lookup request from client to registry...} \\
+	&\texttt{Lookup request exception: java.lang.NullPointerException} \\
+	&\texttt{Good - unable to find non-existant remote person} \\ \\
+	&\texttt{These people are at the party:} \\
+	&\texttt{Remote method call: calling getName on elain} \\
+	&\texttt{Remote method call result: elain} \\
+	&\texttt{Remote method call: calling getName on robert} \\
+	&\texttt{Remote method call result: robert} \\
+	&\texttt{sally ben jim robert elain robert} \\ \\
+	&\texttt{Remote method call: calling getName on robert} \\
+	&\texttt{Remote method call result: robert} \\
+	&\texttt{Was Robert double counted (should be true)? true} \\
+	&\texttt{Remote method call: calling samePerson on robert} \\
+	&\texttt{Remote method call result: true} \\
+	&\texttt{To check again, was Robert double counted (should be true)? true} \\
+	&\texttt{Remote method call: calling samePerson on robert} \\
+	&\texttt{Remote method call result: false} \\
+	&\texttt{Are Elain and Robert the same person (should be false)? false} \\ \\
+	&\texttt{Remote method call: calling samePerson on robert} \\
+	&\texttt{Remote method call exception: java.lang.NullPointerException} \\
+	&\texttt{Good we got an exception null}
+\end{align*}
+\begin{align*}
+	&\text{In the server window:} \\
+	&\texttt{Server received registry lookup request} \\
+	&\texttt{Registry is performing lookup.} \\
+	&\texttt{Registry lookup: elain} \\
+	&\texttt{Server received registry lookup request} \\
+	&\texttt{Registry is performing lookup.} \\
+	&\texttt{Registry lookup: robert} \\
+	&\texttt{Server received registry lookup request} \\
+	&\texttt{Registry is performing lookup.} \\
+	&\texttt{Registry lookup exception: java.lang.NullPointerException} \\
+	&\texttt{Server received method call request} \\
+	&\texttt{Remote method call request: elain.getName(null)} \\
+	&\texttt{Server received method call request} \\
+	&\texttt{Remote method call request: robert.getName(null)} \\
+	&\texttt{Server received method call request} \\
+	&\texttt{Remote method call request: robert.getName(null)} \\
+	&\texttt{Server received method call request} \\
+	&\texttt{Remote method call request: robert.samePerson(<specific Object>)} \\
+	&\texttt{Server received method call request} \\
+	&\texttt{Remote method call request: robert.samePerson(<specific Object>)} \\
+	&\texttt{Remote method call: calling getName on elain} \\
+	&\texttt{Server received method call request} \\
+	&\texttt{Remote method call request: elain.getName(null)} \\
+	&\texttt{Remote method call result: elain} \\
+	&\texttt{Server received method call request} \\
+	&\texttt{Remote method call request: robert.samePerson(<specific Object>)}
+\end{align*}
 
 %------------------------------------------
 
