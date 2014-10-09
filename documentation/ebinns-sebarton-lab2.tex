@@ -29,6 +29,8 @@ Here is a UML diagram to illustrate our design:
 
 We decided not to implement any server skeletons and instead to incorporate the functionality of a dispatcher into our server. We chose to do this because, as stated in the handout, the process to handle remote method calls is not dependent on the specific object the method is being called on. Therefore, it made more sense to us for our server to include the functionality of a dispatcher rather than having each stub require a corresponding skeleton.
 
+\texttt{PartyClient} and \textttt{RemotePerson} are simply a demonstration client and remote object.
+
 \subsection*{Registry Lookup}
 
 \includegraphics[scale=.4]{Lookup.png}
